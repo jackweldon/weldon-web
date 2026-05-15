@@ -62,4 +62,25 @@ Here is a baseline Entra ID validation policy for the front door to get you star
             </issuers>
         </validate-jwt>
     </inbound>
-</policies>
+</policies> 
+``` 
+## Authorisation: Products, not Workspaces
+
+One thing worth flagging upfront because it affects your design: APIM Workspaces don't support MCP yet. If you're using Workspaces for multi-team isolation, you'll be using Products as the authorisation unit for MCP instead. Not a blocker, just plan for it.
+
+## What's coming next
+
+Six things I want to write up properly over the next few weeks:
+
+- Undocumented platform behaviours to watch out for
+- Platform constraints worth knowing before you start
+- Why the API gateway is the right control plane for AI agents (the longer argument)
+- How Claude Code did most of the implementation work
+- Where this fits in the broader agent governance story
+- A productised version of the engagement, for teams who want help running this in their own tenant
+
+## If you're thinking about this
+
+If your team is looking at MCP, agent governance, or AI infrastructure on Azure and you want to talk through the architecture — DM me on LinkedIn or drop me a line through the contact page. Happy to compare notes whether or not it ever becomes an engagement.
+
+**Contact:** jack@weldonweb.co.uk
