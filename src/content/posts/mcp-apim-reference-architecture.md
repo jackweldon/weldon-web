@@ -1,8 +1,10 @@
-# Exposing enterprise APIs as MCP servers through Azure APIM
-
-**Slug:** `weldonweb.co.uk/mcp-apim-reference-architecture`
-**Meta description:** A reference architecture for exposing enterprise REST APIs as Model Context Protocol servers through Azure API Management. Two production patterns, the Terraform shape, and the decisions behind each one.
-
+---
+title: "Exposing enterprise APIs as MCP servers through Azure APIM"
+description: "A reference architecture for exposing enterprise REST APIs as Model Context Protocol servers through Azure API Management."
+publishDate: 2026-05-15
+tags: ["azure", "apim", "mcp"]
+---
+  
 Model Context Protocol is the thing AI agents use to call tools. If you're putting agents in front of your enterprise systems, your existing REST APIs need to speak MCP — or something in front of them does.
 
 I spent a few weeks building a proper reference setup for this on Azure, using API Management as the front door. This post is the architecture and the reasoning. The deeper technical write-ups (gotchas, platform constraints, the Claude Code workflow that built it) are coming over the next few weeks.
@@ -44,6 +46,11 @@ Real deployments use both. Stable CRUD APIs get exposed via Pattern 1. Anything 
 
 Terraform everywhere, deployable end to end. The MCP control plane bits need `azapi` rather than `azurerm` for now — the native resource doesn't exist yet — but it's clean enough.
 
+
+## An Architecture Diagram
+
+![Architecture diagram](/architecture-diagram.svg)
+
 ## Baseline APIM Policy
 
 Here is a baseline Entra ID validation policy for the front door to get you started:
@@ -63,21 +70,7 @@ Here is a baseline Entra ID validation policy for the front door to get you star
         </validate-jwt>
     </inbound>
 </policies> 
-``` 
-## Authorisation: Products, not Workspaces
-
-One thing worth flagging upfront because it affects your design: APIM Workspaces don't support MCP yet. If you're using Workspaces for multi-team isolation, you'll be using Products as the authorisation unit for MCP instead. Not a blocker, just plan for it.
-
-## What's coming next
-
-Six things I want to write up properly over the next few weeks:
-
-- Undocumented platform behaviours to watch out for
-- Platform constraints worth knowing before you start
-- Why the API gateway is the right control plane for AI agents (the longer argument)
-- How Claude Code did most of the implementation work
-- Where this fits in the broader agent governance story
-- A productised version of the engagement, for teams who want help running this in their own tenant
+```  
 
 ## If you're thinking about this
 
