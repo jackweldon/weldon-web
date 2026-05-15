@@ -1,49 +1,69 @@
-# Starlight Starter Kit: Basics
+# weldonweb.co.uk
 
-[![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
+Source for [weldonweb.co.uk](https://weldonweb.co.uk) — my blog on Azure, API Management, and AI infrastructure.
 
-```
-npm create astro@latest -- --template starlight
-```
+## Stack
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+- [Astro](https://astro.build) — static site generator
+- Markdown content in `src/content/blog/`
+- Deployed to Cloudflare Pages on push to `main`
 
-## 🚀 Project Structure
+## Running locally
 
-Inside of your Astro + Starlight project, you'll see the following folders and files:
-
-```
-.
-├── public/
-├── src/
-│   ├── assets/
-│   ├── content/
-│   │   └── docs/
-│   └── content.config.ts
-├── astro.config.mjs
-├── package.json
-└── tsconfig.json
+```bash
+npm install
+npm run dev
 ```
 
-Starlight looks for `.md` or `.mdx` files in the `src/content/docs/` directory. Each file is exposed as a route based on its file name.
+Runs at `http://localhost:4321`.
 
-Images can be added to `src/assets/` and embedded in Markdown with a relative link.
+## Adding a post
 
-Static assets, like favicons, can be placed in the `public/` directory.
+New markdown file in `src/content/blog/`. Filename becomes the URL slug — posts live at `weldonweb.co.uk/{slug}`, no date prefixes.
 
-## 🧞 Commands
+Frontmatter:
 
-All commands are run from the root of the project, from a terminal:
+```yaml
+---
+title: "Post title"
+description: "Meta description for SEO and social previews"
+publishDate: 2026-05-15
+tags: ["azure", "apim", "mcp"]
+draft: false
+---
+```
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+Set `draft: true` to keep a post out of the production build.
 
-## 👀 Want to learn more?
+## Build and deploy
 
-Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).
+```bash
+npm run build      # production build to ./dist
+npm run preview    # preview the production build
+```
+
+Pushes to `main` trigger a Cloudflare Pages build. Other branches get preview deployments — useful for sharing drafts before they're live.
+
+## Current series
+
+**MCP on Azure APIM** — six-part series, May–June 2026.
+
+1. [Exposing enterprise APIs as MCP servers through Azure APIM](https://weldonweb.co.uk/mcp-apim-reference-architecture)
+2. Five things the docs don't tell you about MCP on APIM *(coming)*
+3. Why the API gateway is the right control plane for AI agents *(coming)*
+4. Seven Azure platform constraints when running MCP through APIM *(coming)*
+5. How I built a production Azure reference architecture with Claude Code *(coming)*
+6. MCP-on-APIM: a fixed-price engagement *(coming)*
+
+## About
+
+I'm Jack Weldon — Microsoft Certified Azure Solutions Architect Expert, UK-based, working on Azure integrations and AI infrastructure. Previously built APIM platforms at RBS and other financial services clients.
+
+For consulting work or to compare notes:
+
+- LinkedIn: [linkedin.com/in/jackweldon](https://linkedin.com/in/jackweldon)
+- Contact form: [weldonweb.co.uk/contact](https://weldonweb.co.uk/contact)
+
+## Licence
+
+Content © Jack Weldon. Code samples in posts are MIT licensed unless noted otherwise.
